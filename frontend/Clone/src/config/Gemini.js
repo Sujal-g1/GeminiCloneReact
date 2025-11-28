@@ -10,7 +10,7 @@ import { GoogleGenAI } from "@google/genai";
 
 // 2. Initialize the Gemini Client
 // Pass the API key directly to the constructor
-const ai = new GoogleGenAI({ apiKey: "AIzaSyDRmIyDpPaIjUCaHvU6FIvMVjD1QDqY0T0",});
+const ai = new GoogleGenAI({ apiKey: ,});
 
 
 async function runGenerativeModel(prompt) {

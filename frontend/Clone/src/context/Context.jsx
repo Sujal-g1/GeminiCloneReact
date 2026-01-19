@@ -18,33 +18,43 @@ const ContextProvider = (props) =>{
             },75*index );
     }
 
-    const onSent = async(prompt) =>{
-        setResultdata('')
-        setLoading(true)
-        setShowresult(true)
-        setRecentprompt(input)
-        const response = await runGenerativeModel(input)
-        let resposneArray = response.split("**")
-        let newResponse;
-        for(let i=0; i<resposneArray.length; i++){
-             if(i===0 || i%2 !==1){
-                newResponse += resposneArray[i];
-             }
-             else{
-                newResponse += "<b>" + resposneArray[i] + "</b>"
-             }
-        }
+   const onSent = async (prompt) => {
+  setResultdata('');
+  setLoading(true);
+  setShowresult(true);
+  setRecentprompt(input);
 
-        let newResponse2 = newResponse.split("*").join("</br>")
-       let newResponseArray = newResponse2.split(" ");
-       for(let i =0; i< newResponseArray.length ; i++){
-            const nextWord = newResponseArray[i];
-            delayPara(i , nextWord + " ")
-       }
-        setLoading(false)
-        setInput('')
+  const response = await runGenerativeModel(input);
 
-    } 
+  if (!response) {
+    setResultdata("⚠️ Failed to generate response. Try again.");
+    setLoading(false);
+    return;
+  }
+
+  let responseArray = response.split("**");
+  let newResponse = "";
+
+  for (let i = 0; i < responseArray.length; i++) {
+    if (i === 0 || i % 2 !== 1) {
+      newResponse += responseArray[i];
+    } else {
+      newResponse += "<b>" + responseArray[i] + "</b>";
+    }
+  }
+
+  let newResponse2 = newResponse.split("*").join("</br>");
+  let newResponseArray = newResponse2.split(" ");
+
+  for (let i = 0; i < newResponseArray.length; i++) {
+    const nextWord = newResponseArray[i];
+    delayPara(i, nextWord + " ");
+  }
+
+  setLoading(false);
+  setInput('');
+};
+
  
     // onSent('what is react.js' )
     const contextValue = {

@@ -1,0 +1,9 @@
+# Backend secrets
+backend/.env
+
+# Dependencies
+node_modules/
+frontend/Clone/node_modules/
+
+# System files
+.DS_Store

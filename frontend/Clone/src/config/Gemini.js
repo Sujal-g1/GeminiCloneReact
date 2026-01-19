@@ -1,6 +1,6 @@
 async function runGenerativeModel(prompt) {
   try {
-    const res = await fetch("http://localhost:5050/api/generate", {
+    const res = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -10,11 +10,7 @@ async function runGenerativeModel(prompt) {
 
     const data = await res.json();
 
-    if (!res.ok) {
-      console.error("API error:", data);
-      return null;
-    }
-
+    if (!res.ok) return null;
     return data.text;
   } catch (err) {
     console.error("Fetch error:", err);
